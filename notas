@@ -1,0 +1,39 @@
+Realizar una aplicación para simular un sistema de control de una librería
+-clase libro
+    Título
+    Autor
+    Id
+
+    método para dar de alta libros nuevos
+    método para eliminar libros
+    método para modificar un libro
+    método para búsquedas
+
+    Los métodos serán realizados mediante la propiedad Id
+//////////////////////////////////////////////////////
+
+LOCALSTORAGE
+-Nos permite almacenar datos que persisten sin importar que el navegador se cierre o que le equipo se apague.
+-Los datos almacenados se identifican por medio de un key(clave) y un valor(string)
+-Tiene un rango de almacenamiento de hasta 5MB
+-La información se almacena directamente en el navegador
+-A diferencia de las cookies no se envia como petición HTTP (al servidor)
+-Localstorage no elimina información en automática a diferencia de SESSIONSTORAGE
+
+ARREGLOS
+[1,2,4]
+['','','']
+[true,false]
+
+OBJETOS
+Persona
+Encuestados[{nombre: '', apellido: '',}{nombre: '', apellido: '',}{nombre: '', apellido: '',}]
+un array de objetos se llama JSON
+
+.trim() método d JS que corta los espacios vacíos a la izquierda y derecha de un string.
+
+Vaciar Localstorage
+Localstorage, clear()
+
+submit por defecto recarga la página o el navegador 
+para evitar esta acción por defecto utilizamos el método .preventdefault()
