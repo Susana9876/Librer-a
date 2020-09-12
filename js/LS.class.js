@@ -1,69 +1,48 @@
-class LocalStorageOperation {
+class Libro{
 
-    static almacenarLibro(infoLibro) {
-        let arrayLibros = this.obtenerLS();
-        arrayLibros.push(infoLibro);
-        // console.log(arrayLibros);
-        localStorage.setItem("Libros", JSON.stringify(arrayLibros));
-    }
+    
+    // Propiedades
+        id = 0;
+        autor = '';
+        titulo = '';
 
-    static obtenerLS() {
-        if (localStorage.getItem("Libros") == null) {
-            // console.log("Vacío");
-            return []
-        } else {
-            // console.log("Si hay libros");
-            return JSON.parse(localStorage.getItem("Libros"));
+    //Metodos
+        agregar(infoLibro){
+            this.autor = infoLibro.autor;
+            this.titulo = infoLibro.titulo;
+            this.id= infoLibro.id;
+
+            //console.log(this.id, this.autor, this.titulo);
+
+            const tr = document.createElement("tr");
+            tr.setAttribute('id', `${this.id}`);
+
+            tr.innerHTML = `<th scope="row">${this.id}</th>
+                            <td>${this.titulo}</td>
+                            <td>${this.autor}</td>
+                            <td>
+                                <div class="btn-group" role="" aria-label="Basic example">
+                                    <button id="editar${this.id}" type="button" class="btn btn-success">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button id="eliminar${this.id}" type="button" class="btn btn-danger">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>`
+
+            return tr;
         }
-    }
-    static BorrarStorage() {
-        localStorage.clear()
-    }
 
-    static BorrarLibro(idLibro) {
-        // console.log(idLibro)
-        let arrayLibros = this.ObtenerLS()
-        console.log(arrayLibros);
-        let arregloNuevo = []
+        eliminar(element){
+            // element puede tener dos valores ('I', 'BUTTON')
+            if(element.tagName === 'I'){
+                element.parentElement.parentElement.parentElement.parentElement.remove();
+                LocalStorageOperation.borrarLibro(element.parentElement.parentElement.parentElement.parentElement.id);
 
-        for (let i = 0; i < arrayLibros.length; i++) {
-            if (idLibro != arrayLibros[i].id) arregloNuevo.push(arrayLibros[i])
-        }
-        console.log(arregloNuevo);
-        localStorage.setItem('Libros', JSON.stringify(arregloNuevo))
-    }
-    static ultimoId() {
-        let arrayLibros = this.obtenerLS()
-        if (arrayLibros == 0) return 0
-        return (arrayLibros[arrayLibros.length - 1].id)
-    }
-    static BuscarTitulo(titulo) {
-        // titulo viene de app.js y es el valor de un imput
-        // para nuestro metodo, titulo sera nuestro parametro de buqueda
-        console.log(titulo);
-        let arrayLibros = this.obtenerLS()
-        let resultado = ''
-            // reiteramis nuestro array de libros mediante un ciclo
-            // ponemos i< arrayLÑibros para ahorrarnos una vuelta de mas en el ciclo
-        for (let i = 0; i < arrayLibros.length; i++) {
-            if (arrayLibros[i].titulo.toLowerCase() == titulo) {
-                resultado = arrayLibros[i];
-
+            }else{
+                element.parentElement.parentElement.parentElement.remove();
+                LocalStorageOperation.borrarLibro(element.parentElement.parentElement.parentElement.id);
             }
         }
-        return resultado
-    }
-    static validarTitulo(titulo, autor) {
-        let arrayLibros = this.obtenerLS();
-        let band = 0;
-
-        for (let i = 0; i < arrayLibros.length; i++) {
-            if ((titulo == arrayLibros[i].titulo.trim().toLowerCase()) && (autor == arrayLibros[i].autor.trim().toLowerCase())) {
-                band = 1;
-            }
-        }
-
-        
-        return band;
-    }
 }
